@@ -1,15 +1,15 @@
 <div class="main-layout">
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a routerLink="/" class="logo d-flex align-items-center me-auto me-xl-0">
         <h1 class="sitename">ZenBlog</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu" [class.mobile-nav-active]="isMobileMenuOpen">
         <ul>
-          <li><a routerLink="" routerLinkActive="active">Home</a></li>
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
           <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
-          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a routerLink="/login" routerLinkActive="active">{{ loggedIn() ? getFullName() : 'Login' }}</a></li>
         </ul>
 
       </nav>
@@ -19,7 +19,9 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-         <a><i class="mobile-nav-toggle d-xl-none bi bi-list" (click)="toggleMobileMenu()"></i></a>
+        <button class="mobile-toggle-button" type="button" (click)="toggleMobileMenu()" aria-label="Toggle mobile menu">
+          <i class="mobile-nav-toggle d-xl-none bi" [ngClass]="isMobileMenuOpen ? 'bi-x' : 'bi-list'"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -35,7 +37,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+         <a routerLink="/" class="logo d-flex align-items-center">
             <span class="sitename">ZenBlog</span>
           </a>
           <div class="footer-contact pt-3">
@@ -55,42 +57,9 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hic solutasetp</h4>
-          <ul>
-            <li><a href="#">Molestiae accusamus iure</a></li>
-            <li><a href="#">Excepturi dignissimos</a></li>
-            <li><a href="#">Suscipit distinctio</a></li>
-            <li><a href="#">Dilecta</a></li>
-            <li><a href="#">Sit quas consectetur</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nobis illum</h4>
-          <ul>
-            <li><a href="#">Ipsam</a></li>
-            <li><a href="#">Laudantium dolorum</a></li>
-            <li><a href="#">Dinera</a></li>
+             <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/contact">Contact</a></li>
+            <li><a routerLink="/login">Login</a></li>
             <li><a href="#">Trodelas</a></li>
             <li><a href="#">Flexo</a></li>
           </ul>
@@ -100,13 +69,13 @@
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">ZenBlog</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
+
     </div>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" (click)="scrollToTop($event)"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" (click)="scrollToTop($event)">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 
-  <!-- Preloader -->
+ <div id="preloader"></div>
+</div>
