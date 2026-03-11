@@ -17,8 +17,18 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@auth0/angular-jwt": "^5.2.0",
+    "alertifyjs": "^1.14.0",
+    "bootstrap": "^5.3.8",
+    "font": "^0.0.4",
+    "font-awesome": "^4.7.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "sweetalert2": "^11.26.22",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0",
+    "@popperjs/core": "^2.11.8",
+    "aos": "^2.3.4",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@angular/build": "^21.2.1",
