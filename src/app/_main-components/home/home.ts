@@ -6,7 +6,8 @@ import { BlogService } from '../../_services/blog-service';
 import { BlogDto } from '../../_models/blog';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
-
+import { AboutDto } from '../../_models/aboutDto';
+import { AboutService } from '../../_services/about-service';
 
 
 @Component({
@@ -20,59 +21,51 @@ export class Home implements OnInit, AfterViewInit  {
   isMobileMenuOpen = false;
   latestBlogs: BlogDto[];
   categoriesWithBlogs: CategoryDto[];
+  aboutPreview: AboutDto = {
+    id: null,
+    title: 'About Us',
+    description: 'ZenBlog is where stories, ideas and experiences meet in a simple and modern interface.',
+    imageUrl: 'assets/img/about-company-1.jpg'
+  };
 
   constructor(private blogService: BlogService,
-              private categoryService: CategoryService
-  ){
 
-  }
+              private categoryService: CategoryService,
+              private aboutService: AboutService
+  ){}
 
 ngOnInit() {
 
   this.getLatest5Blogs();
   this.getCategoriesWithBlogs();
+  this.getAboutPreview();
+
+    AOS.init({ duration: 1000, easing: 'ease-in-out', once: true, mirror: false });
 
 
 
-    // Initialize AOS
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
 
     // Initialize Swiper
     this.swiper = new Swiper('.init-swiper', {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
       speed: 600,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false
-      },
+
+      autoplay: { delay: 5000, disableOnInteraction: false },
       slidesPerView: 'auto',
       centeredSlides: true,
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'bullets',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      }
+
+      pagination: { el: '.swiper-pagination', type: 'bullets', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
     });
 
     // Handle scroll top button
     window.addEventListener('scroll', () => {
       const scrollTop = document.querySelector('.scroll-top');
       if (scrollTop) {
-        if (window.scrollY > 100) {
-          scrollTop.classList.add('active');
-        } else {
-          scrollTop.classList.remove('active');
-        }
+
+        if (window.scrollY > 100) { scrollTop.classList.add('active'); }
+        else { scrollTop.classList.remove('active'); }
       }
     });
   }
@@ -81,38 +74,42 @@ ngOnInit() {
     // Remove preloader after view is initialized
 
     const preloader = document.querySelector('#preloader');
-    if (preloader) {
-      preloader.remove();
-    }
 
 
+
+    if (preloader) { preloader.remove(); }
   }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     const navmenu = document.querySelector('#navmenu');
     if (navmenu) {
-      if (this.isMobileMenuOpen) {
-        navmenu.classList.add('mobile-nav-active');
-      } else {
-        navmenu.classList.remove('mobile-nav-active');
-      }
+
+      if (this.isMobileMenuOpen) { navmenu.classList.add('mobile-nav-active'); }
+      else { navmenu.classList.remove('mobile-nav-active'); }
     }
   }
 
   getLatest5Blogs(){
-    this.blogService.getLatest5Blogs().subscribe({
-      next: result => this.latestBlogs= result.data
-    })
+
+    this.blogService.getLatest5Blogs().subscribe({ next: result => this.latestBlogs= result.data })
   }
 
   getCategoriesWithBlogs(){
-    this.categoryService.getCategories().subscribe({
-      next: result => this.categoriesWithBlogs = result.data
-    })
+
+    this.categoryService.getCategories().subscribe({ next: result => this.categoriesWithBlogs = result.data })
   }
 
 
 
 
+  getAboutPreview(){
+    this.aboutService.getAll().subscribe({
+      next: result => {
+        if(result.data && result.data.length>0){
+          this.aboutPreview = result.data[0];
+        }
+      }
+    })
+  }
 }

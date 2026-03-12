@@ -61,3 +61,11 @@
     display: block !important;
   }
 }
+#about-preview {
+  padding-top: 3rem;
+}
+
+#about-preview .btn {
+  border-radius: 999px;
+  padding-inline: 1.25rem;
+}

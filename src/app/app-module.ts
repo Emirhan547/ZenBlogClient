@@ -22,7 +22,8 @@ import { TokenInterceptor } from './_interceptors/token-interceptor';
 import { Message } from './_admin-components/message/message';
 import { Social } from './_admin-components/social/social';
 import { SendMessage } from './_main-components/send-message/send-message';
-
+import { About } from './_main-components/about/about';
+import { AboutAdmin } from './_admin-components/about/about';
 @NgModule({
   declarations: [
     App,
@@ -40,6 +41,9 @@ import { SendMessage } from './_main-components/send-message/send-message';
     Message,
     Social,
     SendMessage,
+   About,
+    AboutAdmin,
+
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
