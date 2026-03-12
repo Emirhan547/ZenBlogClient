@@ -11,35 +11,41 @@ import { CommentDto } from '../../_models/commentDto';
   styleUrl: './blogdetails.css'
 })
 export class Blogdetails {
-blog:BlogDto;
-latestBlogs: BlogDto[];
-newComment : CommentDto = new CommentDto();
+blog: BlogDto;
+  latestBlogs: BlogDto[] = [];
+  newComment: CommentDto = new CommentDto();
 
+  constructor(
+    private blogService: BlogService,
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
 
-constructor(private blogService: BlogService,
-            private route: ActivatedRoute
-){
-  this.getBlogById();
-  this.getLatestBlogs();
-}
+      if (!id) {
+        return;
+      }
 
+      this.getBlogById(id);
+      this.newComment.blogId = id;
+    });
 
+    this.getLatestBlogs();
+  }
 
-getBlogById(){
-    this.blogService.getBlogById(this.route.snapshot.params["id"]).subscribe({
-      next: result => this.blog= result.data
-    })
-}
+  getBlogById(id: string) {
+    this.blogService.getBlogById(id).subscribe({
+      next: (result) => (this.blog = result.data)
+    });
+  }
 
-getLatestBlogs(){
-  this.blogService.getLatest5Blogs().subscribe({
-    next: result => this.latestBlogs= result.data
-  })
-}
+  getLatestBlogs() {
+    this.blogService.getLatest5Blogs().subscribe({
+      next: (result) => (this.latestBlogs = result.data)
+    });
+  }
 
-postComment(){
-  this.newComment.blogId = this.route.snapshot.params["id"];
-
-}
-
+  postComment() {
+    this.newComment.blogId = this.blog?.id;
+  }
 }

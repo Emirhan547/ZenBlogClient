@@ -22,7 +22,8 @@ const routes: Routes = [
   children:[
     {path:'',component:Home},
      {path:'login',component:Login},
-     {path:'blogDetails/:id',component:Blogdetails},
+     {path:'blogdetails/:id',component:Blogdetails},
+     {path:'blogDetails/:id',redirectTo:'blogdetails/:id'},
       {path:'about',component:About},
      {path:'contact',component:ContactMain}
   ]
