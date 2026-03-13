@@ -1,35 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommentService } from '../../_services/comment-service';
-import { CommentDto } from '../../_models/commentDto';
-import { ActivatedRoute } from '@angular/router';
+import { CreateCommentDto } from '../../_models/createCommentDto';
+
 declare const alertify: any;
 
 @Component({
   selector: 'comment-form',
   standalone: false,
   templateUrl: './comment-form.html',
-  styleUrl: './comment-form.css'
+  styleUrls: ['./comment-form.css']
 })
 export class CommentForm {
-  newComment: CommentDto = new CommentDto();
 
-constructor(private commentService: CommentService,
-            private route: ActivatedRoute
-){}
+  @Input() blogId!: string;
 
+  newComment: CreateCommentDto = new CreateCommentDto();
 
-createComment(){
-this.newComment.blogId= this.route.snapshot.params["id"];
+  constructor(private commentService: CommentService) {}
 
-  this.commentService.create(this.newComment).subscribe({
-    error: result => alertify.error("Comment Post Failed!"),
-    complete: () => {
-      alertify.success("Comment Posted!");
-      location.reload();
-    }
-  })
+  createComment() {
 
-}
+    this.newComment.blogId = this.blogId;
 
+    this.commentService.create(this.newComment).subscribe({
+
+      next: () => {
+
+        alertify.success("Comment Posted!");
+        location.reload();
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+        alertify.error("Comment Post Failed!");
+
+      }
+
+    });
+
+  }
 
 }

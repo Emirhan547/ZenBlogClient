@@ -71,8 +71,8 @@
               "node_modules/alertifyjs/build/alertify.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.min.js",
                "src/assets/vendor/aos/aos.js",
-              "src/assets/vendor/swiper/swiper-bundle.min.js",
-              "src/assets/js/main.js"
+              "src/assets/vendor/swiper/swiper-bundle.min.js"
+
 
 ]
           },

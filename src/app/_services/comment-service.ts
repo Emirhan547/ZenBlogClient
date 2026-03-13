@@ -2,38 +2,35 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommentDto } from '../_models/commentDto';
 import { Result } from '../_models/result';
+import { CreateCommentDto } from '../_models/createCommentDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
+
   baseUrl = "https://localhost:7000/api/comments/"
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http : HttpClient) {
-
-}
-
-
-getAll(){
+  getAll(){
     return this.http.get<Result<CommentDto[]>>(this.baseUrl);
   }
 
-create(commentDto:CommentDto){
-    return this.http.post<Result<CommentDto>>(this.baseUrl,commentDto);
+  create(commentDto: CreateCommentDto){
+    return this.http.post<Result<CommentDto>>(this.baseUrl, commentDto);
   }
 
-  update(model:CommentDto){
-    return this.http.put(this.baseUrl,model);
+  update(model: CommentDto){
+    return this.http.put(this.baseUrl, model);
   }
 
-  delete(id:string){
-    return this.http.delete(this.baseUrl+id);
+  delete(id: string){
+    return this.http.delete(this.baseUrl + id);
   }
 
-  getById(id:string){
-    return this.http.get<Result<CommentDto>>(this.baseUrl+id);
+  getById(id: string){
+    return this.http.get<Result<CommentDto>>(this.baseUrl + id);
   }
-
 
 }
