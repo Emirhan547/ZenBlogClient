@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SocialDto } from '../_models/socialDto';
 import { Result } from '../_models/result';
+import { SocialDto } from '../_models/socialDto';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SocialService {
   constructor(private http: HttpClient

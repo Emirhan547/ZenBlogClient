@@ -3,7 +3,7 @@ import { SubCommentDto } from "./subCommentDto";
 
 
 export class CommentDto{
-  id;
+ id;
   firstName;
   lastName;
   email;

@@ -1,8 +1,7 @@
-import { Component } from "@angular/core";
-import { CommentService } from "../../_services/comment-service";
-import { CommentDto } from "../../_models/commentDto";
-import { SweetalertService } from "../../_services/sweetalert-service";
-
+import { Component } from '@angular/core';
+import { CommentService } from '../../_services/comment-service';
+import { SweetalertService } from '../../_services/sweetalert-service';
+import { CommentDto } from '../../_models/commentDto';
 declare const alertify:any;
 
 @Component({

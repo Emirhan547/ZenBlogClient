@@ -10,24 +10,24 @@
               <article class="article">
 
                 <div class="post-img">
-                  <img [src]="blog?.coverImage" alt="" class="img-fluid">
+                  <img src="{{blog.coverImage}}" alt="" class="img-fluid">
                 </div>
 
-              <h2 class="title">{{blog?.title}}</h2>
+                <h2 class="title">{{blog.title}}</h2>
 
                 <div class="meta-top">
                   <ul>
-                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{blog?.user?.firstName}} {{blog?.user?.lastName}}</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{blog?.createdAt | date}}</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{blog.user.firstName}} {{blog.user.lastName}}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{blog.createdAt | date}}</time></a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">2 Comments</a></li>
                   </ul>
                 </div><!-- End meta top -->
 
                 <div class="content">
 
-                 <img [src]="blog?.blogImage" class="img-fluid" alt="">
+                  <img src="{{blog.blogImage}}" class="img-fluid" alt="">
                   <p>
-                  {{blog?.description}}
+                    {{blog.description}}
                   </p>
 
 
@@ -43,7 +43,7 @@
                 <div class="meta-bottom">
                   <i class="bi bi-folder"></i>
                   <ul class="cats">
-                     <li><a href="#">{{blog?.category?.categoryName}}</a></li>
+                    <li><a href="#">{{blog.category.categoryName}}</a></li>
                   </ul>
 
                   <i class="bi bi-tags"></i>
@@ -64,9 +64,9 @@
 
             <div class="container">
 
-             <h4 class="comments-count">{{blog?.comments?.length || 0}} Comments</h4>
+              <h4 class="comments-count">{{blog.comments.length}} Comments</h4>
 
-             @for (item of blog?.comments || []; track $index) {
+              @for (item of blog.comments; track $index) {
 
               <div id="comment-1" class="comment">
                 <div class="d-flex">
@@ -143,7 +143,7 @@
                 <div class="post-item">
                   <img src="{{item.coverImage}}" alt="" class="flex-shrink-0">
                   <div>
-                   <h4><a [routerLink]="['/blogdetails', item.id]">{{item.title}}</a></h4>
+                    <h4><a href="blog-details.html">{{item.title}}</a></h4>
                     <time datetime="2020-01-01">{{item.createdAt | date}}</time>
                   </div>
                 </div><!-- End recent post item-->

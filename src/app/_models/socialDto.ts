@@ -1,5 +1,5 @@
 export class SocialDto{
-  id;
+   id;
   title;
   url;
   icon;
