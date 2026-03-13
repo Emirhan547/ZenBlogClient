@@ -3,34 +3,55 @@ import { Injectable } from '@angular/core';
 import { CommentDto } from '../_models/commentDto';
 import { Result } from '../_models/result';
 import { CreateCommentDto } from '../_models/createCommentDto';
+import { catchError, timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
 
-  baseUrl = "https://localhost:7000/api/comments/"
+  private secureBaseUrl = 'https://localhost:7000/api/comments/';
+  private fallbackBaseUrl = 'http://localhost:5000/api/comments/';
 
   constructor(private http: HttpClient) {}
 
-  getAll(){
-    return this.http.get<Result<CommentDto[]>>(this.baseUrl);
+
+  getAll() {
+    return this.getWithProtocolFallback<CommentDto[]>('');
   }
 
-  create(commentDto: CreateCommentDto){
-    return this.http.post<Result<CommentDto>>(this.baseUrl, commentDto);
+  create(commentDto: CreateCommentDto) {
+    return this.http.post<Result<CommentDto>>(this.secureBaseUrl, commentDto)
+      .pipe(
+        timeout(6000),
+        catchError(() => this.http.post<Result<CommentDto>>(this.fallbackBaseUrl, commentDto).pipe(timeout(6000)))
+      );
   }
 
-  update(model: CommentDto){
-    return this.http.put(this.baseUrl, model);
+
+  update(model: CommentDto) {
+    return this.http.put(this.secureBaseUrl, model);
   }
 
-  delete(id: string){
-    return this.http.delete(this.baseUrl + id);
+
+  delete(id: string) {
+    return this.http.delete(this.secureBaseUrl + id);
   }
 
-  getById(id: string){
-    return this.http.get<Result<CommentDto>>(this.baseUrl + id);
+
+  getById(id: string) {
+    return this.getWithProtocolFallback<CommentDto>(id);
+  }
+
+  private getWithProtocolFallback<T>(path: string) {
+    const secureUrl = this.secureBaseUrl + path;
+    const fallbackUrl = this.fallbackBaseUrl + path;
+
+    return this.http.get<Result<T>>(secureUrl)
+      .pipe(
+        timeout(6000),
+        catchError(() => this.http.get<Result<T>>(fallbackUrl).pipe(timeout(6000)))
+      );
   }
 
 }
