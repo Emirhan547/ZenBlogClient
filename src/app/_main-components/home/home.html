@@ -54,8 +54,8 @@
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row g-3 align-items-stretch">
        <div class="col-lg-9">
-@for (blog of item.blogs; track $index) {
-        @if($index===0){
+ @if(item.blogs && item.blogs.length > 0){
+          @let blog = item.blogs[0];
         <div class="d-lg-flex post-entry featured-layout h-100">
            <a [routerLink]="['/blogdetails/',blog.id]" class="me-lg-4 thumbnail mb-4 mb-lg-0 d-inline-block featured-image-wrap">
             <img src="{{blog.coverImage}}" alt="" class="img-fluid featured-image">
@@ -81,30 +81,35 @@
             </div>
           </div>
         </div>
- }
+
         }
       </div>
 
-   <div class="col-lg-3">
-        @for (blog of item.blogs; track $index) {
-        @if($index===1){
-        <div class="post-list side-highlight h-100">
-          <div class="post-meta">
-            <span class="date">{{item.categoryName}}</span>
-            <span class="mx-1">•</span>
-            <span>{{blog.createdAt | date}}</span>
-          </div>
+    <div class="col-lg-3">
+        @if(item.blogs && item.blogs.length > 0){
+          @let blog = item.blogs[0];
+        <div class="post-list blog-info-card h-100">
+          <p class="info-title mb-3">Yazı Bilgileri</p>
 
-          <h2 class="mb-2 mt-2">
-            <a [routerLink]="['/blogdetails/',blog.id]">{{blog.title}}</a>
-          </h2>
+          <ul class="info-list mb-3">
+            <li>
+              <span class="info-label">Kategori</span>
+              <strong>{{item.categoryName}}</strong>
+            </li>
+            <li>
+              <span class="info-label">Yazar</span>
+              <strong>{{blog.user?.firstName}} {{blog.user?.lastName}}</strong>
+            </li>
+            <li>
+              <span class="info-label">Tarih</span>
+              <strong>{{blog.createdAt | date:'d MMMM y'}}</strong>
+            </li>
+          </ul>
 
-
-          <span class="author mb-2 d-block">{{blog.user.firstName}} {{blog.user.lastName}}</span>
-          <p class="mb-0 d-block">{{blog.description | slice:0:120}}</p>
+          <a [routerLink]="['/blogdetails/',blog.id]" class="info-link">Yazıyı Oku <i class="bi bi-arrow-up-right"></i></a>
         </div>
 
-      }
+
         }
       </div>
 
