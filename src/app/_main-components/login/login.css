@@ -3,23 +3,43 @@ body {
   height: 100%;
 }
 
+body {
+  background: radial-gradient(circle at top left, #cffafe, #eff6ff 48%, #f8fafc 100%);
+}
+
 .form-signin {
-  max-width: 330px;
-  padding: 1rem;
+
+  max-width: 380px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12);
 }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form-signin .form-control {
+  border-radius: 10px;
+}
+
+.form-signin input[type='email'] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+.form-signin input[type='password'] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.form-signin .btn-primary {
+  border: 0;
+  background: linear-gradient(135deg, #0ea5b9, #0b8a9c);
+  border-radius: 10px;
+  font-weight: 600;
 }

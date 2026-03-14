@@ -1,0 +1,18 @@
+#comment-form form {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+}
+
+#comment-form .form-control {
+  border-radius: 10px;
+  border-color: #cbd5e1;
+}
+
+#comment-form button {
+  border-radius: 10px;
+  padding: 0.55rem 1.1rem;
+  font-weight: 600;
+}

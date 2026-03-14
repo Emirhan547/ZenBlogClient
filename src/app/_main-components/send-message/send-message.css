@@ -1,0 +1,21 @@
+.php-email-form {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.php-email-form .form-control {
+  border-radius: 10px;
+  border-color: #cbd5e1;
+}
+
+.php-email-form button[type='submit'] {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0ea5b9, #0b8a9c);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+}
