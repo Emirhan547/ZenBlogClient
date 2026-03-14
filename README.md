@@ -1,59 +1,129 @@
 # ZenBlogClient
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+ZenBlogClient, **ZenBlogServer** ile birlikte çalışan modern bir blog platformunun istemci (frontend) uygulamasıdır. Proje, içerik tüketimi ile yönetim ekranlarını aynı Angular uygulaması içinde sunarak hem ziyaretçi deneyimini hem de panel operasyonlarını tek çatı altında toplar.
 
-## Development server
+## Projenin Amacı
 
-To start a local development server, run:
+ZenBlogClient’ın temel hedefi, blog ürünlerinde ihtiyaç duyulan iki ana deneyimi tutarlı bir yapıda sağlamaktır:
+
+- **Public taraf:** Ziyaretçilerin blog içeriklerini görüntüleyebildiği, detayları okuyabildiği ve etkileşim kurabildiği sayfalar
+- **Admin taraf:** Yetkili kullanıcıların kategori, blog, yorum ve iletişim verilerini yönetebildiği panel ekranları
+
+Bu yaklaşım, backend tarafındaki modüler API yapısıyla uyumlu ve sürdürülebilir bir frontend iskeleti oluşturur.
+
+## Neyi Çözüyor?
+
+ZenBlogClient özellikle aşağıdaki ürün ihtiyaçlarına odaklanır:
+
+- **Blog keşfi:** Ana sayfada içerik listeleri ve güncel yazılar
+- **Detay deneyimi:** Yazı bazında içerik, yorum ve alt yorum akışının görüntülenmesi
+- **İletişim akışı:** Kullanıcıların mesaj/iletişim formu üzerinden platformla etkileşimi
+- **Kimlik doğrulama:** JWT tabanlı oturum yönetimi (login/logout)
+- **Panel yönetimi:** Admin alanında içerik ve yardımcı modüllerin CRUD operasyonları
+
+## Öne Çıkan Teknik Özellikler
+
+- **Angular 21 (Standalone + Modüler yapı)**
+  - Component-first geliştirme yaklaşımı
+  - Routing tabanlı layout ayrımı (main/admin)
+- **JWT tabanlı istemci kimlik yönetimi**
+  - `@auth0/angular-jwt` ile token çözümleme ve süre kontrolü
+  - Route guard ile admin alanı koruması
+- **HTTP Interceptor mimarisi**
+  - İsteklere merkezi token ekleme yaklaşımı
+- **Service katmanı ile API entegrasyonu**
+  - Blogs, Categories, Comments, Messages, About, Social ve ContactInfo uçları için ayrık servis yapısı
+- **UI ekosistemi**
+  - Bootstrap 5, Bootstrap Icons
+  - SweetAlert2, Alertify, AOS, Swiper
+- **Protocol fallback yaklaşımı (seçili servislerde)**
+  - HTTPS endpoint başarısız olduğunda HTTP endpoint’e kontrollü fallback
+
+## Uygulama Mimarisi
+
+`src/app` altında katmanlar sorumluluk bazlı ayrılmıştır:
+
+- **`_main-components`**
+  - Public taraftaki sayfalar (home, blog details, about, contact, login)
+- **`_admin-components`**
+  - Yönetim paneli ekranları (category, blog, comment, contact-info, message, social, about)
+- **`_layouts`**
+  - Main ve Admin layout bileşenleri
+- **`_services`**
+  - Her domain için API çağrılarını yöneten servisler
+- **`_guards`**
+  - Kimlik doğrulama kontrolleri
+- **`_interceptors`**
+  - Token/HTTP pipeline müdahaleleri
+- **`_models`**
+  - DTO ve response/result modelleri
+
+Bu organizasyon, feature eklemeyi ve bakım süreçlerini kolaylaştırır.
+
+## Route Yapısı (Yüksek Seviye)
+
+Uygulama iki temel route grubuna ayrılır:
+
+- **Public:**
+  - `/` (home)
+  - `/login`
+  - `/blogdetails/:id`
+  - `/about`
+  - `/contact`
+- **Admin (AuthGuard korumalı):**
+  - `/admin/category`
+  - `/admin/blog`
+  - `/admin/comment`
+  - `/admin/contactInfo`
+  - `/admin/message`
+  - `/admin/social`
+  - `/admin/about`
+
+## Gereksinimler
+
+- Node.js (LTS önerilir)
+- npm
+- Angular CLI (`npm` script’leri üzerinden de çalıştırılabilir)
+- Çalışır durumda ZenBlogServer API’si
+
+> Not: Servis URL’leri varsayılan olarak `https://localhost:7000` ve bazı senaryolarda `http://localhost:5000` hedeflerini kullanır.
+
+## Kurulum
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Geliştirme Ortamında Çalıştırma
 
 ```bash
-ng generate component component-name
+npm start
 ```
+Uygulama varsayılan olarak `http://localhost:4200` adresinde ayağa kalkar.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build
 
 ```bash
-ng generate --help
+npm run build
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
+Derleme çıktısı `dist/` klasörüne üretilir.
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Test
 
 ```bash
-ng test
+npm test
 ```
+## Backend Entegrasyonu
+Bu client projesi, ZenBlogServer ile birlikte tasarlanmıştır. Auth, blog, kategori, yorum, iletişim ve yönetim modüllerinin tamamı API üzerinden beslenir. Sağlıklı bir local deneyim için server projesinin de eşzamanlı çalıştırılması önerilir.
 
-## Running end-to-end tests
+## Kısa Yol Haritası
 
-For end-to-end (e2e) testing, run:
+- Environment bazlı API URL yönetiminin güçlendirilmesi
+- Admin panelinde rol bazlı yetki görünürlüğü
+- Daha kapsamlı bir form validasyon ve hata sunum standardı
+- Unit/component test kapsamının genişletilmesi
+- E2E test altyapısının eklenmesi
+---
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ZenBlogClient, ZenBlogServer’ın sunduğu temiz ve modüler backend mimarisini, kullanıcı odaklı bir Angular arayüzüyle tamamlayan üretime yakın bir frontend temelidir.
