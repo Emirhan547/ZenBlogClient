@@ -1,6 +1,7 @@
 <div class="page-title">
   <div class="container d-lg-flex justify-content-between align-items-center">
     <h1 class="mb-2 mb-lg-0">About</h1>
+
     <nav class="breadcrumbs">
       <ol>
         <li><a routerLink="/">Home</a></li>
@@ -11,16 +12,56 @@
 </div>
 
 <section id="about" class="about section">
+
   <div class="container">
-    <div class="row gy-4 align-items-center">
-      <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-        <h3>{{ about.title }}</h3>
-        <p class="fst-italic">{{ about.description }}</p>
+
+    <div class="row about-row align-items-stretch gy-5">
+
+      <!-- IMAGE LEFT -->
+      <div class="col-lg-6 order-lg-1 order-2">
+
+        <div class="about-image-wrapper">
+
+          <img
+            [src]="about?.imageUrl || 'assets/img/about-company-1.jpg'"
+            class="about-image"
+            alt="About image">
+
+        </div>
+
       </div>
 
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-        <img [src]="about.imageUrl || 'assets/img/about-company-1.jpg'" class="img-fluid rounded" alt="About image">
+      <!-- TEXT RIGHT -->
+      <div class="col-lg-6 order-lg-2 order-1">
+
+        <div class="about-card">
+
+          <span class="about-badge">
+            HAKKIMIZDA
+          </span>
+
+          <h2 class="about-title">
+            {{ about?.title }}
+          </h2>
+
+          <p class="about-desc">
+            {{ about?.description }}
+          </p>
+
+          <div class="about-actions">
+
+            <a routerLink="/" class="btn-about-primary">
+              Blogları Keşfet
+            </a>
+
+          </div>
+
+        </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>

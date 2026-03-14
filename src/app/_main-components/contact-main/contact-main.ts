@@ -10,7 +10,8 @@ import { ContactInfoDto } from '../../_models/contactInfoDto';
 })
 export class ContactMain {
 
-contactInfos: ContactInfoDto[];
+contactInfos: ContactInfoDto[] = [];
+primaryContactInfo: ContactInfoDto | null = null;
 
   constructor(private contactInfoService: ContactInfoService){
     this.getContactInfos();
@@ -20,7 +21,10 @@ contactInfos: ContactInfoDto[];
 
 getContactInfos(){
   this.contactInfoService.getAll().subscribe({
-    next : result => this.contactInfos= result.data,
+   next : result => {
+      this.contactInfos= result.data;
+      this.primaryContactInfo = this.contactInfos.length > 0 ? this.contactInfos[0] : null;
+    },
     error: result => console.log(result.error)
   })
 }

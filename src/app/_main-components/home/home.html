@@ -25,9 +25,24 @@
     </div>
   </div>
 </section>
-
+<section id="home-about" class="home-about section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-0 align-items-center about-preview-wrap">
+      <div class="col-lg-5">
+        <img [src]="aboutPreview.imageUrl || 'assets/img/about-company-1.jpg'" class="img-fluid about-preview-image" alt="Hakkımızda">
+      </div>
+      <div class="col-lg-7">
+        <div class="about-content-card">
+          <p class="eyebrow">Hakkımızda</p>
+          <h2>{{aboutPreview.title}}</h2>
+          <p>{{aboutPreview.description | slice:0:260}}...</p>
+          <a routerLink="/about" class="about-link">Devamını Oku <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 @for (item of categoriesWithBlogs; track $index) {
-
 <section id="culture-category" class="culture-category section">
   <div class="container section-title" data-aos="fade-up">
     <div class="section-title-container d-flex align-items-center justify-content-between">
@@ -38,19 +53,20 @@
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row g-3 align-items-stretch">
-      <div class="col-lg-9">
-        @for (blog of item.blogs; track $index) {
+       <div class="col-lg-9">
+@for (blog of item.blogs; track $index) {
         @if($index===0){
         <div class="d-lg-flex post-entry featured-layout h-100">
-          <a [routerLink]="['/blogdetails/',blog.id]" class="me-lg-4 thumbnail mb-4 mb-lg-0 d-inline-block featured-image-wrap">
+           <a [routerLink]="['/blogdetails/',blog.id]" class="me-lg-4 thumbnail mb-4 mb-lg-0 d-inline-block featured-image-wrap">
             <img src="{{blog.coverImage}}" alt="" class="img-fluid featured-image">
+
           </a>
 
           <div class="featured-content">
             <div class="post-meta">
               <span class="date">{{item.categoryName}}</span>
               <span class="mx-1">•</span>
-              <span>{{blog.createdAt | date}}</span>
+             <span>{{blog.createdAt | date}}</span>
             </div>
 
 
@@ -60,17 +76,16 @@
 
             <div class="d-flex align-items-center author mt-2">
               <div class="name">
-                <h3 class="m-0 p-0">{{blog.user.firstName}} {{blog.user.lastName}}</h3>
+              <h3 class="m-0 p-0">{{blog.user.firstName}} {{blog.user.lastName}}</h3>
               </div>
             </div>
           </div>
         </div>
-        }
+ }
         }
       </div>
 
-
-      <div class="col-lg-3">
+   <div class="col-lg-3">
         @for (blog of item.blogs; track $index) {
         @if($index===1){
         <div class="post-list side-highlight h-100">
@@ -89,7 +104,7 @@
           <p class="mb-0 d-block">{{blog.description | slice:0:120}}</p>
         </div>
 
-        }
+      }
         }
       </div>
 
@@ -98,3 +113,4 @@
   </div>
 </section>
 }
+

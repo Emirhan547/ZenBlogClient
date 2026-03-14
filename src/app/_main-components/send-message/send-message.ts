@@ -11,31 +11,36 @@ declare const alertify: any;
   styleUrl: './send-message.css'
 })
 export class SendMessage {
-newMessage: MessageDto= new MessageDto();
-  constructor(private messageService: MessageService
+newMessage: MessageDto = new MessageDto();
+  isLoading = false;
+  isSubmitted = false;
+  errorText = '';
 
-  ){}
+  constructor(private messageService: MessageService) {}
 
+  sendMessage(){
+    this.isLoading = true;
+    this.isSubmitted = false;
+    this.errorText = '';
 
-
-
-sendMessage(){
-  this.messageService.create(this.newMessage).subscribe({
-    error: result => alertify.error("Message Send Failed!"),
-    complete: ()=> {
-      Swal.fire({
-        title: 'Message has been sent!',
-        showCancelButton: false,
-        icon: 'success'
-      });
-
-       setTimeout(()=>{
-          location.reload();
-         }, 1000 )
-
-
-    }
-  })
-}
-
+    this.messageService.create(this.newMessage).subscribe({
+      next: () => {
+        this.isSubmitted = true;
+        this.newMessage = new MessageDto();
+      },
+      error: () => {
+        this.errorText = 'Mesaj gönderilemedi, lütfen tekrar deneyiniz.';
+        alertify.error('Message Send Failed!');
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Message has been sent!',
+          showCancelButton: false,
+          icon: 'success'
+        });
+      }
+    });
+  }
 }

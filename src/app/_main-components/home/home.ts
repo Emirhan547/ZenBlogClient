@@ -1,13 +1,12 @@
-import {  AfterViewInit, Component, OnInit } from '@angular/core';
-import Swiper from 'swiper';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import {  AfterViewInit, Component, OnInit } from '@angular/core';import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import AOS from 'aos';
 import { BlogService } from '../../_services/blog-service';
 import { BlogDto } from '../../_models/blog';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
-
-
+import Swiper from 'swiper';
+import { AboutService } from '../../_services/about-service';
+import { AboutDto } from '../../_models/aboutDto';
 
 @Component({
   selector: 'home',
@@ -20,9 +19,15 @@ export class Home implements OnInit, AfterViewInit  {
   isMobileMenuOpen = false;
   latestBlogs: BlogDto[];
   categoriesWithBlogs: CategoryDto[];
-
+aboutPreview: AboutDto = {
+    id: null,
+    title: 'Hakkımızda',
+    description: 'ZenBlog; güçlü içerik, sade tasarım ve yüksek okunabilirlik odaklı modern bir yayın deneyimi sunar.',
+    imageUrl: 'assets/img/about-company-1.jpg'
+  };
   constructor(private blogService: BlogService,
-              private categoryService: CategoryService
+              private categoryService: CategoryService,
+              private aboutService: AboutService
   ){
 
   }
@@ -31,7 +36,7 @@ ngOnInit() {
 
   this.getLatest5Blogs();
   this.getCategoriesWithBlogs();
-
+this.getAboutPreview();
 
 
     // Initialize AOS
@@ -41,8 +46,7 @@ ngOnInit() {
       once: true,
       mirror: false
     });
-
-    // Initialize Swiper
+// Initialize Swiper
     this.swiper = new Swiper('.init-swiper', {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
@@ -63,6 +67,7 @@ ngOnInit() {
         prevEl: '.swiper-button-prev'
       }
     });
+
 
     // Handle scroll top button
     window.addEventListener('scroll', () => {
@@ -102,7 +107,7 @@ ngOnInit() {
 
   getLatest5Blogs(){
     this.blogService.getLatest5Blogs().subscribe({
-      next: result => this.latestBlogs= result.data
+       next: result => this.latestBlogs= result.data
     })
   }
 
@@ -111,7 +116,15 @@ ngOnInit() {
       next: result => this.categoriesWithBlogs = result.data
     })
   }
-
+getAboutPreview(){
+    this.aboutService.getAll().subscribe({
+      next: result => {
+        if(result.data && result.data.length > 0){
+          this.aboutPreview = result.data[0];
+        }
+      }
+    })
+  }
 
 
 
