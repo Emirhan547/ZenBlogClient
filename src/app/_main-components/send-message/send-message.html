@@ -2,26 +2,26 @@
   <form #sendMessageForm="ngForm" (ngSubmit)="sendMessage()" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
     <div class="row gy-4">
       <div class="col-md-6">
-        <input type="text" name="name" [(ngModel)]="newMessage.name" class="form-control" placeholder="Your Name" required>
+        <input type="text" name="name" [(ngModel)]="newMessage.name" class="form-control" placeholder="Ad Soyad" required>
       </div>
 
       <div class="col-md-6">
-        <input type="email" class="form-control" name="email" [(ngModel)]="newMessage.email" placeholder="Your Email" required>
+       <input type="email" class="form-control" name="email" [(ngModel)]="newMessage.email" placeholder="E-posta Adresi" required>
       </div>
 
       <div class="col-md-12">
-        <input type="text" class="form-control" name="subject" [(ngModel)]="newMessage.subject" placeholder="Subject" required>
+       <input type="text" class="form-control" name="subject" [(ngModel)]="newMessage.subject" placeholder="Konu" required>
       </div>
 
       <div class="col-md-12">
-        <textarea class="form-control" name="messageBody" [(ngModel)]="newMessage.messageBody" rows="6" placeholder="Message" required></textarea>
+         <textarea class="form-control" name="messageBody" [(ngModel)]="newMessage.messageBody" rows="6" placeholder="Mesajınız" required></textarea>
       </div>
 
       <div class="col-md-12 text-center form-feedbacks">
-        <div class="loading" [class.d-block]="isLoading">Loading</div>
+       <div class="loading" [class.d-block]="isLoading">Gönderiliyor...</div>
         <div class="error-message" [class.d-block]="errorText">{{errorText}}</div>
-        <div class="sent-message" [class.d-block]="isSubmitted">Your message has been sent. Thank you!</div>
-        <button type="submit" [disabled]="sendMessageForm.invalid || isLoading">Send Message</button>
+        <div class="sent-message" [class.d-block]="isSubmitted">Mesajınız başarıyla gönderildi. Teşekkür ederiz!</div>
+        <button type="submit" [disabled]="sendMessageForm.invalid || isLoading">Mesaj Gönder</button>
       </div>
     </div>
   </form>

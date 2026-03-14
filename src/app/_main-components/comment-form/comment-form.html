@@ -3,8 +3,8 @@
 
     <form #commentForm="ngForm" (ngSubmit)="createComment()">
 
-      <h4>Post Comment</h4>
-      <p>Your email address will not be published. Required fields are marked *</p>
+       <h4>Yorum Gönder</h4>
+      <p>E-posta adresiniz yayınlanmayacaktır. Zorunlu alanlar * ile işaretlenmiştir.</p>
 
       <div class="row">
 
@@ -14,7 +14,7 @@
             [(ngModel)]="newComment.firstName"
             type="text"
             class="form-control"
-            placeholder="Your First Name*"
+            placeholder="Adınız*"
             required>
         </div>
 
@@ -24,7 +24,7 @@
             [(ngModel)]="newComment.lastName"
             type="text"
             class="form-control"
-            placeholder="Your Last Name*"
+           placeholder="Soyadınız*"
             required>
         </div>
 
@@ -34,7 +34,7 @@
             [(ngModel)]="newComment.email"
             type="email"
             class="form-control"
-            placeholder="Your Email*"
+            placeholder="E-posta Adresiniz*"
             required>
         </div>
 
@@ -46,7 +46,7 @@
             name="body"
             [(ngModel)]="newComment.body"
             class="form-control"
-            placeholder="Your Comment*"
+            placeholder="Yorumunuz*"
             required>
           </textarea>
         </div>
@@ -54,7 +54,7 @@
 
       <div class="text-center mt-3">
         <button type="submit" class="btn btn-primary">
-          Post Comment
+          Yorum Gönder
         </button>
       </div>
 

@@ -90,6 +90,7 @@ main {
 .footer .footer-contact p,
 .footer .credits {
   color: #cbd5e1;
+  transition: color 0.2s ease;
 }
 
 
@@ -109,6 +110,12 @@ main {
   margin-right: 0.5rem;
   background: rgba(255, 255, 255, 0.08);
   color: #e2e8f0;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+  background: rgba(103, 232, 249, 0.16);
 }
 
 .copyright {

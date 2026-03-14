@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="tr" data-bs-theme="auto">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,7 +9,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Astro v5.9.2" />
-    <title>Login Page</title>
+   <title>Giriş Sayfası</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/sign-in/"
@@ -127,7 +127,7 @@
         type="button"
         aria-expanded="false"
         data-bs-toggle="dropdown"
-        aria-label="Toggle theme (auto)"
+        aria-label="Tema değiştir (otomatik)"
       >
         <svg class="bi my-1 theme-icon-active" aria-hidden="true">
           <use href="#circle-half"></use>
@@ -148,7 +148,7 @@
             <svg class="bi me-2 opacity-50" aria-hidden="true">
               <use href="#sun-fill"></use>
             </svg>
-            Light
+            Açık
             <svg class="bi ms-auto d-none" aria-hidden="true">
               <use href="#check2"></use>
             </svg>
@@ -164,7 +164,7 @@
             <svg class="bi me-2 opacity-50" aria-hidden="true">
               <use href="#moon-stars-fill"></use>
             </svg>
-            Dark
+            Koyu
             <svg class="bi ms-auto d-none" aria-hidden="true">
               <use href="#check2"></use>
             </svg>
@@ -180,7 +180,7 @@
             <svg class="bi me-2 opacity-50" aria-hidden="true">
               <use href="#circle-half"></use>
             </svg>
-            Auto
+           Otomatik
             <svg class="bi ms-auto d-none" aria-hidden="true">
               <use href="#check2"></use>
             </svg>
@@ -197,7 +197,7 @@
           width="72"
           height="57"
         />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+       <h1 class="h3 mb-3 fw-normal">Lütfen giriş yapın</h1>
         <div class="form-floating">
           <input
             type="email"
@@ -205,10 +205,10 @@
             [(ngModel)]="loginDto.email"
             class="form-control"
             id="floatingInput"
-            placeholder="name@example.com"
+            placeholder="ornek@eposta.com"
             required=""
           />
-          <label for="floatingInput">Email address</label>
+         <label for="floatingInput">E-posta adresi</label>
         </div>
         <div class="form-floating">
           <input
@@ -217,7 +217,7 @@
             [(ngModel)]="loginDto.password"
             class="form-control"
             id="floatingPassword"
-            placeholder="Password"
+            placeholder="Şifre"
             required=""
           />
           <label for="floatingPassword">Password</label>
@@ -230,11 +230,11 @@
             id="checkDefault"
           />
           <label class="form-check-label" for="checkDefault">
-            Remember me
+           Beni hatırla
           </label>
         </div>
         <button class="btn btn-primary w-100 py-2" [disabled]="loginForm.invalid" type="submit">
-          Sign in
+         Giriş Yap
         </button>
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
       </form>
